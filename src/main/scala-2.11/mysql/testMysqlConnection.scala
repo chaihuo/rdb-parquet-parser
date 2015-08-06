@@ -7,10 +7,6 @@ object testMysqlConnection {
 
   def main(args: Array[String]) {
     try {
-//      val rs = MySQLUtil.getTable()
-//      if(rs.next())
-//      printf(rs.getString("content"))
-      MySQLUtil
     }
   }
 }

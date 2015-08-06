@@ -76,8 +76,6 @@ object MySQLUtil {
       return 0
     }
   }
-//  def getDataSet(): ResultSet = {
-//  }
 
 
 }

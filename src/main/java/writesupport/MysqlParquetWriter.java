@@ -38,8 +38,4 @@ public class MysqlParquetWriter extends ParquetWriter<List<String>> {
     super(file, new MysqlWriteSupport(schema), codecName, DEFAULT_BLOCK_SIZE, DEFAULT_PAGE_SIZE, enableDictionary, false);
   }
 
-//  public MysqlParquetWriter(Path file, MessageType schema, CompressionCodecName codecName, boolean enableDictionary) throws IOException {
-//    super(file, ParquetFileWriter.Mode.CREATE, new MysqlWriteSupport(schema), codecName, DEFAULT_BLOCK_SIZE, DEFAULT_PAGE_SIZE, DEFAULT_PAGE_SIZE, enableDictionary, false, DEFAULT_WRITER_VERSION, new Configuration(), MAX_PADDING_SIZE_DEFAULT);
-//  }
-
 }

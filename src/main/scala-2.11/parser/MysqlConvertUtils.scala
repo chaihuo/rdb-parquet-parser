@@ -38,7 +38,7 @@ object MysqlConvertUtils {
         stringBuilder.append(ls)
       }
     } finally {
-      Utils.closeQuietly(reader)
+      CloseUtils.closeQuietly(reader)
     }
     return stringBuilder.toString
   }
@@ -117,91 +117,4 @@ object MysqlConvertUtils {
 
   }
 
-//  @throws(classOf[IOException])
-//  def convertParquetToCSV(parquetFile: File, csvOutputFile: File) {
-//    Preconditions.checkArgument(parquetFile.getName.endsWith(".parquet"), "parquet file should have .parquet extension")
-//    Preconditions.checkArgument(csvOutputFile.getName.endsWith(".csv"), "csv file should have .csv extension")
-//    Preconditions.checkArgument(!csvOutputFile.exists, "Output file " + csvOutputFile.getAbsolutePath + " already exists")
-////    LOG.info("Converting " + parquetFile.getName + " to " + csvOutputFile.getName)
-//    val parquetFilePath: Path = new Path(parquetFile.toURI)
-//    val configuration: Configuration = new Configuration(true)
-//    val readSupport: GroupReadSupport = new GroupReadSupport
-//    val readFooter: ParquetMetadata = ParquetFileReader.readFooter(configuration, parquetFilePath)
-//    val schema: MessageType = readFooter.getFileMetaData.getSchema
-//    readSupport.init(configuration, null, schema)
-//    val w: BufferedWriter = new BufferedWriter(new FileWriter(csvOutputFile))
-//    val reader: ParquetReader[Group] = new ParquetReader[Group](parquetFilePath, readSupport)
-//    try {
-//      var g: Group = null
-//      while ((({
-//        g = reader.read; g
-//      })) != null) {
-//        writeGroup(w, g, schema)
-//      }
-//      reader.close
-//    } finally {
-//      Utils.closeQuietly(w)
-//    }
-//  }
-
-//  @throws(classOf[IOException])
-//  private def writeGroup(w: BufferedWriter, g: Group, schema: MessageType) {
-//    {
-//      var j: Int = 0
-//      while (j < schema.getFieldCount) {
-//        {
-//          if (j > 0) {
-//            w.write(CSV_DELIMITER)
-//          }
-//          val valueToString: String = g.getValueToString(j, 0)
-//          w.write(valueToString)
-//        }
-//        ({
-//          j += 1; j - 1
-//        })
-//      }
-//    }
-//    w.write('\n')
-//  }
-
-//  @deprecated
-//  @throws(classOf[IOException])
-////  def convertParquetToCSVEx(parquetFile: File, csvOutputFile: File) {
-//    Preconditions.checkArgument(parquetFile.getName.endsWith(".parquet"), "parquet file should have .parquet extension")
-//    Preconditions.checkArgument(csvOutputFile.getName.endsWith(".csv"), "csv file should have .csv extension")
-//    Preconditions.checkArgument(!csvOutputFile.exists, "Output file " + csvOutputFile.getAbsolutePath + " already exists")
-//    LOG.info("Converting " + parquetFile.getName + " to " + csvOutputFile.getName)
-//    val parquetFilePath: Path = new Path(parquetFile.toURI)
-//    val configuration: Configuration = new Configuration(true)
-//    val readFooter: ParquetMetadata = ParquetFileReader.readFooter(configuration, parquetFilePath)
-//    val schema: MessageType = readFooter.getFileMetaData.getSchema
-//    val parquetFileReader: ParquetFileReader = new ParquetFileReader(configuration, parquetFilePath, readFooter.getBlocks, schema.getColumns)
-//    val w: BufferedWriter = new BufferedWriter(new FileWriter(csvOutputFile))
-//    var pages: PageReadStore = null
-//    try {
-//      while (null != (({
-//        pages = parquetFileReader.readNextRowGroup; pages
-//      }))) {
-//        val rows: Long = pages.getRowCount
-//        LOG.info("Number of rows: " + rows)
-//        val columnIO: MessageColumnIO = new ColumnIOFactory().getColumnIO(schema)
-//        val recordReader: RecordReader[Group] = columnIO.getRecordReader(pages, new GroupRecordConverter(schema))
-//        {
-//          var i: Int = 0
-//          while (i < rows) {
-//            {
-//              val g: Group = recordReader.read
-//              writeGroup(w, g, schema)
-//            }
-//            ({
-//              i += 1; i - 1
-//            })
-//          }
-//        }
-//      }
-//    } finally {
-//      Utils.closeQuietly(parquetFileReader)
-//      Utils.closeQuietly(w)
-//    }
-//  }
 }
