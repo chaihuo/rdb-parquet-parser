@@ -21,7 +21,6 @@ import writesupport.MysqlParquetWriter
  */
 object MysqlConvertUtils {
 //  private val LOG: Log = Log.getLog(classOf[MysqlConvertUtils])
-//  val CSV_DELIMITER: String = "|"
   val LIMIT = 1000
 
   @throws(classOf[IOException])
