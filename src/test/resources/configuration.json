@@ -1,10 +1,10 @@
 {
-  "mysql_host":"172.19.17.211",
-  "mysql_port":"3306",
-  "mysql_db_name":"test",
-  "mysql_user":"root",
-  "mysql_pwd":"root",
-  "mysql_table":"parquet",
-  "mysql_primary_column":"id",
-  "data_set_limit":"1000"
+  "MYSQL_HOST": "172.19.17.211",
+  "MYSQL_PORT": "3306",
+  "MYSQL_DB_NAME": "test",
+  "MYSQL_USER": "root",
+  "MYSQL_PWD": "root",
+  "MYSQL_TABLE": "parquet",
+  "MYSQL_PRIMARY_COLUMN": "id",
+  "DATA_SET_LIMIT": "1000"
 }

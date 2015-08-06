@@ -5,6 +5,7 @@ import java.sql.{ResultSet, SQLException}
 import java.text.SimpleDateFormat
 import java.util.Arrays
 
+import json.{JsonUtil, ParserInfo}
 import mysql.MySQLUtil
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.Path
@@ -21,7 +22,7 @@ import writesupport.MysqlParquetWriter
  */
 object MysqlConvertUtils {
 //  log class
-  val LIMIT = 1000
+  val pi: ParserInfo = JsonUtil.getParserInfo()
 
   @throws(classOf[IOException])
   private def readFile(path: String): String = {
@@ -63,25 +64,30 @@ object MysqlConvertUtils {
     val schema: MessageType = MessageTypeParser.parseMessageType(rawSchema)
     val writer: MysqlParquetWriter = new MysqlParquetWriter(path, schema, enableDictionary)
     // Repeat get data set from MySQL, data set size defined in json file
-    val RowCount = MySQLUtil.getRowCount();
+    val RowCount = MySQLUtil.getRowCount(pi.getConnString, pi.getMysqlTable);
     if(RowCount <= 0) {
-      throw new IOException("Table " + "parquet_copy" + " is empty.")
+      throw new IOException("Table " + pi.getMysqlTable + " is empty.")
     }
-    if(RowCount > LIMIT) {
+    if(RowCount > pi.getDataSetLimit) {
       var parsedCount = 0
       while (parsedCount <= RowCount) {
         // Get data set limited by LIMIT
         // Then write into parquet file
-        val rs: ResultSet = MySQLUtil.getTable(parsedCount, LIMIT)
-        val line: String = null
+        val rs: ResultSet = MySQLUtil.getTable(
+          pi.getConnString,
+          pi.getMysqlTable,
+          pi.getMysqlPrimaryColumn,
+          parsedCount,
+          pi.getDataSetLimit)
         //    var lineNumber: Int = 0
         try {
           while ((rs.next)) {
             val df: SimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
             writer.write(Arrays.asList(String.valueOf(rs.getInt("id")), rs.getString("content"), String.valueOf(rs.getFloat("price")), String.valueOf(rs.getTimestamp("time").getTime)))
             //        lineNumber += 1
+            println(rs.getInt("id"))
           }
-          parsedCount += LIMIT
+          parsedCount += pi.getDataSetLimit
         }
         catch {
           case e: SQLException => {
@@ -94,7 +100,10 @@ object MysqlConvertUtils {
       writer.close
     } else {
 
-      val rs: ResultSet = MySQLUtil.getTable()
+      val rs: ResultSet = MySQLUtil.getTable(
+        pi.getConnString,
+        pi.getMysqlTable,
+        pi.getMysqlPrimaryColumn)
       val line: String = null
       //    var lineNumber: Int = 0
       try {

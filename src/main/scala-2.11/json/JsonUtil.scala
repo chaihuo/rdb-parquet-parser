@@ -50,6 +50,17 @@ object JsonUtil {
     return pi
   }
 
+  def getTableInfo(): ParserInfo = {
+    val gson: Gson = new Gson()
+    val jsonString: String = this.ReadJsonFile()
+    val pi: ParserInfo = gson.fromJson(jsonString, classOf[ParserInfo])
+    return pi
+  }
 
-
+  def getTableInfo(tableNum: Int): ParserInfo = {
+    val gson: Gson = new Gson()
+    val jsonString: String = this.ReadJsonFile()
+    val pi: ParserInfo = gson.fromJson(jsonString, classOf[ParserInfo])
+    return pi
+  }
 }

@@ -77,4 +77,9 @@ class ParserInfo {
   def setDataSetLimit(dataSetLimit: Integer) {
     DATA_SET_LIMIT = dataSetLimit
   }
+
+  def getConnString: String =  {
+    return "jdbc:mysql://" + MYSQL_HOST + ":" + MYSQL_PORT + "/" + MYSQL_DB_NAME + "?user=" + MYSQL_USER + "&password=" + MYSQL_PWD
+  }
+
 }
