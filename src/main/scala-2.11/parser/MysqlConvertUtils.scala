@@ -20,7 +20,7 @@ import writesupport.MysqlParquetWriter
  * Created by root on 15-7-30.
  */
 object MysqlConvertUtils {
-//  private val LOG: Log = Log.getLog(classOf[MysqlConvertUtils])
+//  log class
   val LIMIT = 1000
 
   @throws(classOf[IOException])

@@ -49,7 +49,7 @@ object JsonUtil {
     val pi: ParserInfo = gson.fromJson(jsonString, classOf[ParserInfo])
     return pi
   }
-  
-  
-  
+
+
+
 }
