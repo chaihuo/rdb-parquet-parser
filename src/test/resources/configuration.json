@@ -4,7 +4,9 @@
   "MYSQL_DB_NAME": "test",
   "MYSQL_USER": "root",
   "MYSQL_PWD": "root",
-  "MYSQL_TABLE": "parquet",
+  "MYSQL_TABLE": "parquet_copy",
   "MYSQL_PRIMARY_COLUMN": "id",
-  "DATA_SET_LIMIT": "1000"
+  "DATA_SET_LIMIT": "1000",
+  "SCHEMA_FILE_PATH": "./src/test/resources/parquet.schema",
+  "OUTPUT_PATH": "./src/test/resources/output.parquet"
 }

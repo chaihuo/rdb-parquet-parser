@@ -124,5 +124,16 @@ object MysqlConvertUtils {
     }
 
   }
-
+  def main(args: Array[String]) {
+    val schema: File = new File(pi.getSchemaFilePath)
+    val output: File = new File(pi.getOutputPath)
+    try {
+      MysqlConvertUtils.convertSQLToParquet(schema, output)
+    }
+    catch {
+      case e: IOException => {
+        e.printStackTrace
+      }
+    }
+  }
 }

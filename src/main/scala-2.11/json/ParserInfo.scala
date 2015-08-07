@@ -12,6 +12,8 @@ class ParserInfo {
   private var MYSQL_TABLE: String = null
   private var MYSQL_PRIMARY_COLUMN: String = null
   private var DATA_SET_LIMIT: Integer = 1000
+  private var SCHEMA_FILE_PATH: String = null
+  private var OUTPUT_PATH: String = null
 
 
   def getMysqlHost: String = {
@@ -76,6 +78,23 @@ class ParserInfo {
 
   def setDataSetLimit(dataSetLimit: Integer) {
     DATA_SET_LIMIT = dataSetLimit
+  }
+
+
+  def getSchemaFilePath: String = {
+    return SCHEMA_FILE_PATH
+  }
+
+  def setSchemaFilePath(schemaFilePath: String) {
+    SCHEMA_FILE_PATH = schemaFilePath
+  }
+
+  def getOutputPath: String = {
+    return OUTPUT_PATH
+  }
+
+  def setOutputPath(outputPath: String) {
+    OUTPUT_PATH = outputPath
   }
 
   def getConnString: String =  {
