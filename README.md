@@ -1,5 +1,3 @@
-# rdb-parquet-parser
-rdb-parquet-parser
 MySQL data into parquet!
 ===================
 
