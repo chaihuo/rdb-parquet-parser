@@ -19,12 +19,25 @@ Documents
 > - Use specs2 for unit test.
 
 
-#### <i class="icon-file"></i> MySQL functions
 
-Get data from MySQL database.
-
-#### <i class="icon-folder-open"></i> /src/main/scala-2.11/json
+#### <i class="icon-folder-open"></i>Module : /src/main/scala-2.11/json
 
 Implements functions to read Json file:
 /src/test/resources/configuration.json
 The Json file contains user configurations on MySQL connection and parser work folder.
+
+#### <i class="icon-folder-open"></i>Module : /src/main/scala-2.11/mysql
+
+Implements functions to get data from a MySQL database.
+You can manage connection infomation and SQL page size by modify (Json) configuration file.
+Configuration file see **configuration module**.
+
+#### <i class="icon-folder-open"></i>Module : /src/main/scala-2.11/parser
+
+..
+
+
+
+
+
+
