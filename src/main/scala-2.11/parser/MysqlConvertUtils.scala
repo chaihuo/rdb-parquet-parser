@@ -5,7 +5,7 @@ import java.sql.{ResultSet, SQLException}
 import java.text.SimpleDateFormat
 import java.util.Arrays
 
-import json.{JsonUtil, ParserInfo}
+import json.{ParquetInfoJsonUtil, JsonUtil, ParserInfo}
 import mysql.MySQLUtil
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.Path
@@ -22,7 +22,7 @@ import writesupport.MysqlParquetWriter
  */
 object MysqlConvertUtils {
 //  log class
-  val pi: ParserInfo = JsonUtil.getParserInfo()
+  val pi: ParserInfo = ParquetInfoJsonUtil.getInfo()
 
   @throws(classOf[IOException])
   private def readFile(path: String): String = {

@@ -1,24 +1,22 @@
 package json
 
-import java.io.{BufferedReader, FileInputStream, IOException, InputStreamReader}
-
-import com.google.gson.Gson
+import java.io.{IOException, InputStreamReader, FileInputStream, BufferedReader}
 
 /**
- * Created by root on 15-8-4.
+ * Created by root on 15-8-12.
  */
-object JsonUtil {
-  val cnf_path = "./src/test/resources/configuration.json"
-  def ReadJsonFile(): String = {
+class JsonUtil {
+  def ReadJsonFile(file_path: String): String = {
     var reader: BufferedReader = null
     var last_str: String = ""
     try {
-      val fileInputStream: FileInputStream = new FileInputStream(cnf_path)
+      val fileInputStream: FileInputStream = new FileInputStream(file_path)
       val inputStreamReader: InputStreamReader = new InputStreamReader(fileInputStream, "UTF-8")
       reader = new BufferedReader(inputStreamReader)
       var tempString: String = null
       while ((({
-        tempString = reader.readLine; tempString
+        tempString = reader.readLine;
+        tempString
       })) != null) {
         last_str += tempString
       }
@@ -42,25 +40,6 @@ object JsonUtil {
     }
     return last_str
   }
-  
-  def getParserInfo(): ParserInfo = {
-    val gson: Gson = new Gson()
-    val jsonString: String = this.ReadJsonFile()
-    val pi: ParserInfo = gson.fromJson(jsonString, classOf[ParserInfo])
-    return pi
-  }
 
-  def getTableInfo(): ParserInfo = {
-    val gson: Gson = new Gson()
-    val jsonString: String = this.ReadJsonFile()
-    val pi: ParserInfo = gson.fromJson(jsonString, classOf[ParserInfo])
-    return pi
-  }
 
-  def getTableInfo(tableNum: Int): ParserInfo = {
-    val gson: Gson = new Gson()
-    val jsonString: String = this.ReadJsonFile()
-    val pi: ParserInfo = gson.fromJson(jsonString, classOf[ParserInfo])
-    return pi
-  }
 }

@@ -6,7 +6,8 @@ package json
  */
 object TestJson {
   def main(args: Array[String]) {
-    val pi: ParserInfo = JsonUtil.getParserInfo()
+    val json_path = "./src/test/resources/configuration.json"
+    val pi: ParserInfo = ParquetInfoJsonUtil.getInfo(json_path)
     System.out.println("Host: " + pi.getMysqlHost)
   }
 }

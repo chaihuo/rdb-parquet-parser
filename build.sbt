@@ -10,8 +10,9 @@ libraryDependencies ++= Seq(
   "mysql" % "mysql-connector-java" % "5.1.36",
   "org.apache.hadoop" % "hadoop-client" % "2.7.1",
   "org.apache.hadoop" % "hadoop-common" % "2.7.1",
-//  "net.sf.json-lib" % "json-lib" % "2.4"
-  "com.google.code.gson" % "gson" % "2.3.1"
+  "com.google.code.gson" % "gson" % "2.3.1",
+  "org.specs2" % "specs2_2.11" % "3.3.1"
+//  "junit" % "junit" % "4.12"
 )
 
 
