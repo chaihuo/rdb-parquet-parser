@@ -5,15 +5,10 @@ import java.sql.{ResultSet, SQLException}
 import java.text.SimpleDateFormat
 import java.util.Arrays
 
-import json.{ParquetInfoJsonUtil, JsonUtil, ParserInfo}
+import json.{ParquetInfoJsonUtil, ParserInfo}
+import model.ParquetTable
 import mysql.MySQLUtil
-import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.Path
-import org.apache.parquet.Preconditions
-import org.apache.parquet.example.data.Group
-import org.apache.parquet.hadoop.example.GroupReadSupport
-import org.apache.parquet.hadoop.metadata.ParquetMetadata
-import org.apache.parquet.hadoop.{ParquetFileReader, ParquetReader}
 import org.apache.parquet.schema.{MessageType, MessageTypeParser}
 import writesupport.MysqlParquetWriter
 
@@ -82,8 +77,8 @@ object MysqlConvertUtils {
         //    var lineNumber: Int = 0
         try {
           while ((rs.next)) {
-            val df: SimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-            writer.write(Arrays.asList(String.valueOf(rs.getInt("id")), rs.getString("content"), String.valueOf(rs.getFloat("price")), String.valueOf(rs.getTimestamp("time").getTime)))
+//            val df: SimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+            writer.write(ParquetTable.tableList(rs))
             //        lineNumber += 1
             println(rs.getInt("id"))
           }

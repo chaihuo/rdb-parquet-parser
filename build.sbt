@@ -12,7 +12,6 @@ libraryDependencies ++= Seq(
   "org.apache.hadoop" % "hadoop-common" % "2.7.1",
   "com.google.code.gson" % "gson" % "2.3.1",
   "org.specs2" % "specs2_2.11" % "3.3.1"
-//  "junit" % "junit" % "4.12"
 )
 
 
