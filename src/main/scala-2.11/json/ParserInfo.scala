@@ -1,5 +1,7 @@
 package json
 
+import java.io.IOException
+
 /**
  * Created by root on 15-8-6.
  */
@@ -101,4 +103,25 @@ class ParserInfo {
     return "jdbc:mysql://" + MYSQL_HOST + ":" + MYSQL_PORT + "/" + MYSQL_DB_NAME + "?user=" + MYSQL_USER + "&password=" + MYSQL_PWD
   }
 
+  def isValid(): Boolean = {
+    if(MYSQL_HOST != null
+      && MYSQL_PORT != null
+      && MYSQL_DB_NAME != null
+      && MYSQL_USER != null
+      && MYSQL_PWD != null
+      && MYSQL_TABLE != null
+      && MYSQL_PRIMARY_COLUMN  != null
+      && DATA_SET_LIMIT != null
+      && SCHEMA_FILE_PATH != null
+      && OUTPUT_PATH != null) {
+      if(DATA_SET_LIMIT > 0) {
+        if(DATA_SET_LIMIT > 100000) {throw new IOException("DATA_SET_LIMIT " + DATA_SET_LIMIT + " is too large, this may cause performance issue")}
+        return true
+      }
+      throw new IOException("DATA_SET_LIMIT " + DATA_SET_LIMIT + " is invalid")
+      return false
+    } else {
+      throw new IOException("Configuration file has missing some objects")
+    }
+  }
 }

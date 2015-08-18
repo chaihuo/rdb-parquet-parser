@@ -11,10 +11,4 @@ libraryDependencies ++= Seq(
   "org.apache.hadoop" % "hadoop-client" % "2.7.1",
   "org.apache.hadoop" % "hadoop-common" % "2.7.1",
   "com.google.code.gson" % "gson" % "2.3.1",
-  "org.specs2" % "specs2_2.11" % "3.3.1"
-)
-
-
-
-
-    
+  "org.specs2" % "specs2-core_2.11" % "3.6.4-20150813062946-0dbb642")
