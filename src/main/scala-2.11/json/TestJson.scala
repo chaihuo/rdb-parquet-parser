@@ -6,8 +6,9 @@ package json
  */
 object TestJson {
   def main(args: Array[String]) {
-    val json_path = "./src/test/resources/configuration_copy.json"
-    val pi: ParserInfo = ParquetInfoJsonUtil.getInfo(json_path)
-    System.out.println("Host: " + pi.getDataSetLimit)
+//    val json_path = "./src/test/resources/configuration_copy.json"
+//    val pi: ParserInfo = ParquetInfoJsonUtil.getInfo(json_path)
+//    System.out.println("Host: " + pi.getDataSetLimit)
+    ParquetInfoJsonUtil.ReadJsonFile("")
   }
 }

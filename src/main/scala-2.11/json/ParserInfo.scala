@@ -115,13 +115,12 @@ class ParserInfo {
       && SCHEMA_FILE_PATH != null
       && OUTPUT_PATH != null) {
       if(DATA_SET_LIMIT > 0) {
-        if(DATA_SET_LIMIT > 100000) {throw new IOException("DATA_SET_LIMIT " + DATA_SET_LIMIT + " is too large, this may cause performance issue")}
+        if(DATA_SET_LIMIT > 100000) {throw new IllegalArgumentException("DATA_SET_LIMIT is too large, this may cause performance issue")}
         return true
       }
-      throw new IOException("DATA_SET_LIMIT " + DATA_SET_LIMIT + " is invalid")
-      return false
+      throw new IllegalArgumentException("DATA_SET_LIMIT is invalid")
     } else {
-      throw new IOException("Configuration file has missing some objects")
+      throw new IllegalArgumentException("Configuration file has missing some objects")
     }
   }
 }

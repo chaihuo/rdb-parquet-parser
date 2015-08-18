@@ -24,7 +24,7 @@ class JsonConfigUtil {
     }
     catch {
       case e: IOException => {
-        e.printStackTrace
+        throw new FileNotFoundException("Configuration file does not exist")
       }
     } finally {
       if (reader != null) {
