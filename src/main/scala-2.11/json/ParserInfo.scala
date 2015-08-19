@@ -115,7 +115,6 @@ class ParserInfo {
       && SCHEMA_FILE_PATH != null
       && OUTPUT_PATH != null) {
       if(DATA_SET_LIMIT > 0) {
-        if(DATA_SET_LIMIT > 100000) {throw new IllegalArgumentException("DATA_SET_LIMIT is too large, this may cause performance issue")}
         return true
       }
       throw new IllegalArgumentException("DATA_SET_LIMIT is invalid")
