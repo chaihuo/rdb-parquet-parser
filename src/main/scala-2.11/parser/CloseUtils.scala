@@ -17,6 +17,7 @@ object CloseUtils {
     catch {
       case ioe: IOException => {
 //        LOG
+        throw new IOException("Close MySQL connection error")
       }
     }
   }

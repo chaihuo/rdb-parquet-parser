@@ -20,7 +20,14 @@ object MysqlConvertUtils {
   val pi: ParserInfo = ParquetInfoJsonUtil.getInfo()
 
   @throws(classOf[IOException])
-  private def readFile(path: String): String = {
+  private def readSchemaFile(path: String): String = {
+    val file: File = new File(path)
+    if(file.isDirectory) {
+      throw new FileNotFoundException("Is a directory")
+    }
+    if(!file.exists()) {
+      throw new FileNotFoundException("Cannot find schema file")
+    }
     val reader: BufferedReader = new BufferedReader(new FileReader(path))
     val stringBuilder: StringBuilder = new StringBuilder
     try {
@@ -40,17 +47,21 @@ object MysqlConvertUtils {
 
   @throws(classOf[IOException])
   def getSchema(schemaFile: File): String = {
-    return readFile(schemaFile.getAbsolutePath)
+    return readSchemaFile(schemaFile.getAbsolutePath)
   }
 
   @throws(classOf[IOException])
-  def convertSQLToParquet(schemaFile: File, outputParquetFile: File) {
+  def convertSQLToParquet() {
+    pi.isValid()
+    val schemaFile: File = new File(pi.getSchemaFilePath)
+    val outputParquetFile: File = new File(pi.getOutputPath)
     convertSQLToParquet(schemaFile, outputParquetFile, false)
   }
 
   @throws(classOf[IOException])
   def convertSQLToParquet(schemaFile: File, outputParquetFile: File, enableDictionary: Boolean) {
 //    LOG.info("Converting " + schemaFile.getName + " to " + outputParquetFile.getName)
+
     val rawSchema: String = getSchema(schemaFile)
     if (outputParquetFile.exists) {
       throw new IOException("Output file " + outputParquetFile.getAbsolutePath + " already exists")
@@ -120,10 +131,10 @@ object MysqlConvertUtils {
 
   }
   def main(args: Array[String]) {
-    val schema: File = new File(pi.getSchemaFilePath)
-    val output: File = new File(pi.getOutputPath)
     try {
-      MysqlConvertUtils.convertSQLToParquet(schema, output)
+      val schemaFile: File = new File("aaa")
+      val outputParquetFile: File = new File(pi.getOutputPath)
+      MysqlConvertUtils.convertSQLToParquet(schemaFile, outputParquetFile, false)
     }
     catch {
       case e: IOException => {

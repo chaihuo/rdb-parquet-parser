@@ -27,7 +27,6 @@ object TestParquetInfoJsonUtil extends org.specs2.mutable.Specification {
     "when configuration contains error, functions should throw objects invalid exception" >> {
       ParquetInfoJsonUtil.getInfo("/root/IdeaProjects/rdb-parquet-parser/src/test/resources/ImproperConfigurationFiles/empty_configuration_file.json") must throwA(new IOException("Configuration file maybe empty or contains error"))
       ParquetInfoJsonUtil.getInfo("/root/IdeaProjects/rdb-parquet-parser/src/test/resources/ImproperConfigurationFiles/configuration_missing_objects.json") must throwA(new IllegalArgumentException("Configuration file has missing some objects"))
-//      ParquetInfoJsonUtil.getInfo("/root/IdeaProjects/rdb-parquet-parser/src/test/resources/ImproperConfigurationFiles/configuration_large_LIMIT.json") must throwA(new IllegalArgumentException("DATA_SET_LIMIT is too large, this may cause performance issue"))
       ParquetInfoJsonUtil.getInfo("/root/IdeaProjects/rdb-parquet-parser/src/test/resources/ImproperConfigurationFiles/configuration_invalid_LIMIT.json") must throwA(new IllegalArgumentException("DATA_SET_LIMIT is invalid"))
     }
   }
