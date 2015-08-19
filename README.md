@@ -71,6 +71,7 @@ How to run/test using sbt.
 First of all, you should install scala & sbt.
 
 scala: http://www.scala-lang.org/documentation/getting-started.html
+
 sbt: http://www.scala-sbt.org/0.13/tutorial/index.html
 
 We use Ubuntu 14.1 + scala 2.11.7 + sbt 0.13.9.
