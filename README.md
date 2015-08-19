@@ -52,16 +52,7 @@ Contains main logic code to get data from MySQL and parse thems into parquet.
 Here is an example:
 
 > **Example:** 
->   "MYSQL_HOST": "192.168.1.1",
-  "MYSQL_PORT": "3306",
-  "MYSQL_DB_NAME": "test",
-  "MYSQL_USER": "root",
-  "MYSQL_PWD": "root",
-  "MYSQL_TABLE": "parquet",
-  "MYSQL_PRIMARY_COLUMN": "id",
-  "DATA_SET_LIMIT": "1000",
-  "SCHEMA_FILE_PATH": "./src/test/resources/parquet.schema",
-  "OUTPUT_PATH": "./src/test/resources/output.parquet"
+>   rdb-parquet-parser/src/test/resources/configuration.json
 
 
 
