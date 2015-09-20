@@ -76,5 +76,35 @@ object MySQLUtil {
     }
   }
 
+  // Insert into MySQL
+  def insertNationalDebt(connString: String, tableName: String, data: String): Unit = {
+
+
+    if(data == null || data.isEmpty) {
+      throw new IllegalArgumentException("Data string is null or empty")
+    }
+
+    Class.forName("com.mysql.jdbc.Driver")
+
+
+    val conn = DriverManager.getConnection("jdbc:mysql://qkdata1.cltv2qruve9e.rds.cn-north-1.amazonaws.com.cn:3306/HF_Future", "hf_app", "hf_app%2015")
+    val statement = conn.createStatement()
+    // Execute Query
+    val SQL = "insert into tf " +
+//      "(SYMBOL,BUSINESSTIME," +
+//      "OPENPRICE,LASTPRICE,HIGHPRICE,LOWPRICE,SETTLEPRICE,PRESETTLE," +
+//      "CLOSEPRICE,PRECLOSE,CQ,VOLUME,CM,AMOUNT,PREPOSITION,POSITION," +
+//      "POSITIONCHANGE,LIMITUP,LIMITDOWN,SIDE,OC,B01,B02,B03,B04,B05," +
+//      "S01,S02,S03,S04,S05,BV01,BV02,BV03,BV04,BV05,SV01,SV02,SV03," +
+//      "SV04,SV05,CURRDELTA,PREDELTA,SETTLEMENTGROUPID,SETTLEMENTID," +
+//      "CHANGE,CHANGERATIO,CONTINUESIGN,TRADINGDATE,LOCALTIME,RECTIME,EXCHANGECODE,ID,UNIX) " +
+      "values " + data
+
+//    print(SQL)
+
+    val rs = statement.executeUpdate(SQL)
+    conn.close()
+
+  }
 
 }

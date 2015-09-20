@@ -124,5 +124,23 @@
     <orderEntry type="library" name="SBT: org.specs2:specs2-common_2.11:3.6.4-20150813062946-0dbb642:jar" level="project" />
     <orderEntry type="library" name="SBT: org.specs2:specs2-core_2.11:3.6.4-20150813062946-0dbb642:jar" level="project" />
     <orderEntry type="library" name="SBT: org.specs2:specs2-matcher_2.11:3.6.4-20150813062946-0dbb642:jar" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar:///usr/java/sqljdbc.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar:///usr/java/sqljdbc4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
