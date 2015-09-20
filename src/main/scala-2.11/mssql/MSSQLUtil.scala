@@ -34,7 +34,7 @@ object MSSQLUtil {
 
 
     if(connString == null || connString.isEmpty) {
-      throw new IllegalArgumentException("MySQL connection string is null or empty")
+      throw new IllegalArgumentException("The connection string is null or empty")
     }
     if(tableName == null || tableName.isEmpty) {
       throw new IllegalArgumentException("SQL argument table name is null or empty")
@@ -80,5 +80,29 @@ object MSSQLUtil {
     val rs = statement.executeQuery(SQL)
     return rs
   }
+
+  def getContractID(connString: String, tableName: String): String = {
+
+
+    if(connString == null || connString.isEmpty) {
+      throw new IllegalArgumentException("MSSQL connection string is null or empty")
+    }
+    if(tableName == null || tableName.isEmpty) {
+      throw new IllegalArgumentException("SQL argument table name is null or empty")
+    }
+
+    val conn = DriverManager.getConnection(connString)
+    val statement = conn.createStatement()
+    // Execute Query
+    val SQL = "select CONTRACTID from " + tableName + " group by CONTRACTID;"
+    val rs = statement.executeQuery(SQL)
+
+    if(rs.next()) {
+      return rs.getString("CONTRACTID")
+    } else {
+      return null
+    }
+  }
+
 
 }

@@ -90,7 +90,7 @@ object MySQLUtil {
     val conn = DriverManager.getConnection(connString, user, key)
     val statement = conn.createStatement()
     // Execute Query
-    val SQL = "insert into tf " +
+    val SQL = "insert ignore into " + tableName +
 //      "(SYMBOL,BUSINESSTIME," +
 //      "OPENPRICE,LASTPRICE,HIGHPRICE,LOWPRICE,SETTLEPRICE,PRESETTLE," +
 //      "CLOSEPRICE,PRECLOSE,CQ,VOLUME,CM,AMOUNT,PREPOSITION,POSITION," +
@@ -102,7 +102,33 @@ object MySQLUtil {
 
 //    print(SQL)
 
-    val rs = statement.executeUpdate(SQL)
+    statement.executeUpdate(SQL)
+    conn.close()
+
+  }
+
+
+
+  // Insert into MySQL
+  def insertCommodityFuture(connString: String, user: String, key: String, tableName: String, data: String): Unit = {
+
+
+    if(data == null || data.isEmpty) {
+      throw new IllegalArgumentException("Data string is null or empty")
+    }
+
+    Class.forName("com.mysql.jdbc.Driver")
+
+
+    val conn = DriverManager.getConnection(connString, user, key)
+    val statement = conn.createStatement()
+    // Execute Query
+    val SQL = "insert ignore into " + tableName +
+      " values " + data
+
+//        print(SQL)
+
+    statement.executeUpdate(SQL)
     conn.close()
 
   }
