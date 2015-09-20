@@ -14,9 +14,11 @@ import mysql.MySQLUtil
 object MSSQL2MySQLUtils {
 //  log class
   
-  val MSSQLConnString : String = "jdbc:sqlserver://172.19.17.222:1433;databaseName=GTA_TFL2_TAQ_201501;user=sa;password=sa"
+  val MSSQLConnString : String = "jdbc:sqlserver://"
   
-  val MySQLConnString: String = "jdbc:mysql://qkdata1.cltv2qruve9e.rds.cn-north-1.amazonaws.com.cn:3306/HF_Future?user=hf_app&password='hf_app%2015'"
+  val MySQLConnString: String = "jdbc:mysql://"
+  val MySQLuser: String = ""
+  val MySQLkey: String = ""
 
 
   @throws(classOf[IOException])
@@ -57,7 +59,7 @@ object MSSQL2MySQLUtils {
               data += ","
               data += NationalDept.getData(rs)
             }
-            MySQLUtil.insertNationalDebt(MySQLConnString, tableName, data)
+            MySQLUtil.insertNationalDebt(MySQLConnString, MySQLuser, MySQLkey, tableName, data)
             parsedCount += limit
             print("page:" + parsedCount + "\r\n")
           }
@@ -87,7 +89,7 @@ object MSSQL2MySQLUtils {
             data += ","
             data += NationalDept.getData(rs)
           }
-          MySQLUtil.insertNationalDebt(MySQLConnString, tableName, data)
+          MySQLUtil.insertNationalDebt(MySQLConnString, MySQLuser, MySQLkey, tableName, data)
         }
         catch {
           case e: SQLException => {

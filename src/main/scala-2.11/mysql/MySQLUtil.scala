@@ -77,7 +77,7 @@ object MySQLUtil {
   }
 
   // Insert into MySQL
-  def insertNationalDebt(connString: String, tableName: String, data: String): Unit = {
+  def insertNationalDebt(connString: String, user: String, key: String, tableName: String, data: String): Unit = {
 
 
     if(data == null || data.isEmpty) {
@@ -87,7 +87,7 @@ object MySQLUtil {
     Class.forName("com.mysql.jdbc.Driver")
 
 
-    val conn = DriverManager.getConnection("jdbc:mysql://qkdata1.cltv2qruve9e.rds.cn-north-1.amazonaws.com.cn:3306/HF_Future", "hf_app", "hf_app%2015")
+    val conn = DriverManager.getConnection(connString, user, key)
     val statement = conn.createStatement()
     // Execute Query
     val SQL = "insert into tf " +
