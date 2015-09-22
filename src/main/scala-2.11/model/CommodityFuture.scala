@@ -62,6 +62,7 @@ object CommodityFuture {
 
   def getData(rs: ResultSet): String = {
     val df: SimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS")
+    val dfDate: SimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd")
     val data = "('" + rs.getString("CONTRACTID") + "','" +
       df.format(rs.getTimestamp("TDATETIME")) + "','" +
       rs.getString("CONTRACTNAME") + "','" +
@@ -114,6 +115,7 @@ object CommodityFuture {
       rs.getDouble("CHGPCT") + "','" +
       rs.getString("VARIETIES") + "','" +
       df.format(rs.getTimestamp("LOCALTIME")) + "','" +
+      dfDate.format(rs.getTimestamp("LOCALTIME")) + "','" +
       rs.getString("MFLXID") + "','" +
       rs.getString("MARKET") + "','" +
       rs.getLong("UNIX") + "')"

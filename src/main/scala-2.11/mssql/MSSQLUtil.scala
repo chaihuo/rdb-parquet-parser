@@ -104,5 +104,27 @@ object MSSQLUtil {
     }
   }
 
+  def getSymbol(connString: String, tableName: String): String = {
+
+
+    if(connString == null || connString.isEmpty) {
+      throw new IllegalArgumentException("MSSQL connection string is null or empty")
+    }
+    if(tableName == null || tableName.isEmpty) {
+      throw new IllegalArgumentException("SQL argument table name is null or empty")
+    }
+
+    val conn = DriverManager.getConnection(connString)
+    val statement = conn.createStatement()
+    // Execute Query
+    val SQL = "select SYMBOL from " + tableName + " group by SYMBOL;"
+    val rs = statement.executeQuery(SQL)
+
+    if(rs.next()) {
+      return rs.getString("SYMBOL")
+    } else {
+      return null
+    }
+  }
 
 }

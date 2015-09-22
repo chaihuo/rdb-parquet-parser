@@ -7,6 +7,14 @@ import java.text.SimpleDateFormat
  * Created by root on 15-9-19.
  */
 object NationalDebt {
+
+
+  def whichTable(symbol: String): String = {
+    if (symbol.toLowerCase().contains("t") && symbol.toLowerCase().matches("\\bt\\d{4}")) return "t"
+    if (symbol.toLowerCase().contains("tf")) return null
+    return null
+  }
+  
   def getData(rs: ResultSet): String = {
     val df: SimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS")
     val data = "('" + rs.getString("SYMBOL") + "','" +
