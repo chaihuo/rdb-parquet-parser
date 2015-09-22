@@ -25,7 +25,7 @@ object CommodityFutureMSSQL2MySQLMultiThread{
   def main(args: Array[String]) {
 
     val blockingQueue: ArrayBlockingQueue[Runnable] = new ArrayBlockingQueue[Runnable](50)
-    val executor: ThreadPoolExecutor = new ThreadPoolExecutor(5, 10, 7, TimeUnit.DAYS, blockingQueue)// All threads wait for 2 days max
+    val executor: ThreadPoolExecutor = new ThreadPoolExecutor(20, 20, 7, TimeUnit.DAYS, blockingQueue)// All threads wait for 2 days max
     try {
       // Get MSSQL tables
       val tableList: util.ArrayList[String] = MSSQLUtil.getTableList(MSSQLConnString)

@@ -17,8 +17,7 @@
       <sourceFolder url="file://$MODULE_DIR$/../../target/scala-2.11/resource_managed/main" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/../../src/test/resources" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/../../target/scala-2.11/resource_managed/test" type="java-test-resource" />
-      <excludeFolder url="file://$MODULE_DIR$/../../target/resolution-cache" />
-      <excludeFolder url="file://$MODULE_DIR$/../../target/streams" />
+      <excludeFolder url="file://$MODULE_DIR$/../../target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -124,15 +123,6 @@
     <orderEntry type="library" name="SBT: org.specs2:specs2-common_2.11:3.6.4-20150813062946-0dbb642:jar" level="project" />
     <orderEntry type="library" name="SBT: org.specs2:specs2-core_2.11:3.6.4-20150813062946-0dbb642:jar" level="project" />
     <orderEntry type="library" name="SBT: org.specs2:specs2-matcher_2.11:3.6.4-20150813062946-0dbb642:jar" level="project" />
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar:///usr/java/sqljdbc.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>

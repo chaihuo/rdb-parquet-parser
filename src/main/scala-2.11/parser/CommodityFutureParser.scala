@@ -54,7 +54,7 @@ class CommodityFutureParser(tableName: String, limit: Int) extends Runnable {
             }
             MySQLUtil.insertCommodityFuture(MySQLConnString, MySQLuser, MySQLkey, targetTableName, data)
             parsedCount += l
-            print("page:" + parsedCount + "\r\n")
+            print("From table:" + tn + ",page:" + parsedCount + "\r\n")
           }
           catch {
             case e: SQLException => {
@@ -73,7 +73,7 @@ class CommodityFutureParser(tableName: String, limit: Int) extends Runnable {
           0,
           l)
         try {
-          var data: String = null
+          var data: String = ""
           if(rs.next()) {
             data += CommodityFuture.getData(rs)
           }
@@ -83,6 +83,7 @@ class CommodityFutureParser(tableName: String, limit: Int) extends Runnable {
             data += CommodityFuture.getData(rs)
           }
           MySQLUtil.insertCommodityFuture(MySQLConnString, MySQLuser, MySQLkey, targetTableName, data)
+          print("From table:" + tn + ".\r\n")
         }
         catch {
           case e: SQLException => {
