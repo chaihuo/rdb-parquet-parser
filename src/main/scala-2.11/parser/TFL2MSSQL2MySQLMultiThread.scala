@@ -2,7 +2,7 @@ package parser
 
 import java.io._
 import java.util
-import java.util.concurrent.{ArrayBlockingQueue, ThreadPoolExecutor, TimeUnit}
+import java.util.concurrent.{LinkedBlockingQueue, ArrayBlockingQueue, ThreadPoolExecutor, TimeUnit}
 
 import mssql.MSSQLUtil
 import parser.TFL2Parser
@@ -22,8 +22,8 @@ object TFL2MSSQL2MySQLMultiThread{
 
   def main(args: Array[String]) {
 
-    val blockingQueue: ArrayBlockingQueue[Runnable] = new ArrayBlockingQueue[Runnable](50)
-    val executor: ThreadPoolExecutor = new ThreadPoolExecutor(10, 10, 7, TimeUnit.DAYS, blockingQueue)// All threads wait for 2 days max
+    val linkedQueue: LinkedBlockingQueue[Runnable] = new LinkedBlockingQueue[Runnable]
+    val executor: ThreadPoolExecutor = new ThreadPoolExecutor(20, 20, 7, TimeUnit.DAYS, linkedQueue)// All threads wait for 2 days max
     try {
       // Get MSSQL tables
       val tableList: util.ArrayList[String] = MSSQLUtil.getTableList(MSSQLConnString)

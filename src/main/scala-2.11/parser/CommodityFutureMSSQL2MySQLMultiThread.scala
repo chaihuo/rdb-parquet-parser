@@ -3,7 +3,7 @@ package parser
 import java.io._
 import java.sql.{ResultSet, SQLException}
 import java.util
-import java.util.concurrent.{TimeUnit, ThreadPoolExecutor, ArrayBlockingQueue}
+import java.util.concurrent.{LinkedBlockingQueue, TimeUnit, ThreadPoolExecutor, ArrayBlockingQueue}
 
 import model.{CommodityFuture, NationalDebt}
 import mssql.MSSQLUtil
@@ -24,8 +24,8 @@ object CommodityFutureMSSQL2MySQLMultiThread{
 
   def main(args: Array[String]) {
 
-    val blockingQueue: ArrayBlockingQueue[Runnable] = new ArrayBlockingQueue[Runnable](50)
-    val executor: ThreadPoolExecutor = new ThreadPoolExecutor(20, 20, 7, TimeUnit.DAYS, blockingQueue)// All threads wait for 2 days max
+    val linkedQueue: LinkedBlockingQueue[Runnable] = new LinkedBlockingQueue[Runnable]
+    val executor: ThreadPoolExecutor = new ThreadPoolExecutor(20, 20, 7, TimeUnit.DAYS, linkedQueue)// All threads wait for 2 days max
     try {
       // Get MSSQL tables
       val tableList: util.ArrayList[String] = MSSQLUtil.getTableList(MSSQLConnString)
@@ -44,7 +44,7 @@ object CommodityFutureMSSQL2MySQLMultiThread{
           val commodityFutureParser = new CommodityFutureParser(tableName, 10000)
           executor.execute(commodityFutureParser)
           print(
-            "Pool size：" + executor.getPoolSize()
+            " Pool size：" + executor.getPoolSize()
               + "，queue size：" + executor.getQueue().size()
               + "，Completed task count：" + executor.getCompletedTaskCount()
               + ".\r\n"
