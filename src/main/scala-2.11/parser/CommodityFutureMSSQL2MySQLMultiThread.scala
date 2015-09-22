@@ -15,7 +15,7 @@ import mysql.MySQLUtil
 object CommodityFutureMSSQL2MySQLMultiThread{
   //  log class
 
-  val MSSQLConnString : String = "jdbc:sqlserver://172.19.17.222:1433;databaseName=GTA_MFL1_TAQ_201505;user=sa;password=sa;"
+  val MSSQLConnString : String = "jdbc:sqlserver://172.19.17.186:1433;databaseName=GTA_MFL1_TAQ_201507;user=sa;password=sa;"
 
   val MySQLConnString: String = "jdbc:mysql://qkdata1.cltv2qruve9e.rds.cn-north-1.amazonaws.com.cn:3306/HF_Future?useUnicode=true&characterEncoding=utf8"
   val MySQLuser: String = "hf_app"
@@ -25,7 +25,7 @@ object CommodityFutureMSSQL2MySQLMultiThread{
   def main(args: Array[String]) {
 
     val linkedQueue: LinkedBlockingQueue[Runnable] = new LinkedBlockingQueue[Runnable]
-    val executor: ThreadPoolExecutor = new ThreadPoolExecutor(20, 20, 7, TimeUnit.DAYS, linkedQueue)// All threads wait for 2 days max
+    val executor: ThreadPoolExecutor = new ThreadPoolExecutor(30, 30, 7, TimeUnit.DAYS, linkedQueue)// All threads wait for 2 days max
     try {
       // Get MSSQL tables
       val tableList: util.ArrayList[String] = MSSQLUtil.getTableList(MSSQLConnString)
@@ -41,7 +41,7 @@ object CommodityFutureMSSQL2MySQLMultiThread{
         // Copy into MySQL table
 
         if(tableName != null) {
-          val commodityFutureParser = new CommodityFutureParser(tableName, 10000)
+          val commodityFutureParser = new CommodityFutureParser(tableName, limit)
           executor.execute(commodityFutureParser)
           print(
             " Pool size：" + executor.getPoolSize()
@@ -52,13 +52,14 @@ object CommodityFutureMSSQL2MySQLMultiThread{
         }
         currentTableNum += 1
       }
+      executor.shutdown()
     }
     catch {
       case e: IOException => {
         e.printStackTrace
       }
     }
-    executor.shutdown()
+    executor.awaitTermination(7, TimeUnit.DAYS)
     print("Finish!\r\n")
   }
 
