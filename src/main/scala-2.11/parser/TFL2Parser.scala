@@ -10,38 +10,28 @@ import mysql.MySQLUtil
 /**
  * Created by root on 15-9-21.
  */
-class TFL2Parser(tableName: String, limit: Int) extends Runnable {
-  val MSSQLConnString : String = "jdbc:sqlserver://172.19.17.222:1433;databaseName=GTA_TFL2_TAQ_201503;user=sa;password=sa;"
-
-  val MySQLConnString: String = "jdbc:mysql://qkdata1.cltv2qruve9e.rds.cn-north-1.amazonaws.com.cn:3306/HF_Future?useUnicode=true&characterEncoding=utf8"
-  val MySQLuser: String = "hf_app"
-  val MySQLkey: String = "hf_app%2015"
-  val tn: String = tableName
-  val l: Int = 1000
-
-  // Constructor
-//  def this(tableName : String, limit : String) = {
-//    this(tn, l);
-//  }
+class TFL2Parser(MSSQLConnString: String, MSSQLTableName: String, MySQLConnString: String, MySQLuser: String, MySQLkey: String, limit: Int) extends Runnable {
 
   override def run(): Unit = {
-    val RowCount: Int = MSSQLUtil.getRowCount(MSSQLConnString, tn)
+    val RowCount: Int = MSSQLUtil.getRowCount(MSSQLConnString, MSSQLTableName)
     if(RowCount <= 0) {
-      throw new IOException("Table " + tn + " is empty.")
+      print(MSSQLConnString + "\r\n")
+      print(MSSQLTableName)
+      throw new IOException("Table " + MSSQLTableName + " is empty.")
     }
-    val targetSymbolID: String = MSSQLUtil.getSymbol(MSSQLConnString, tn)
+    val targetSymbolID: String = MSSQLUtil.getSymbol(MSSQLConnString, MSSQLTableName)
     val targetTableName: String = NationalDebt.whichTable(targetSymbolID)
     if(targetTableName != null) {
-      if(RowCount > l) {
+      if(RowCount > limit) {
         var parsedCount = 0
         while (parsedCount <= RowCount) {
 
           val rs: ResultSet = MSSQLUtil.getTable(
             MSSQLConnString,
-            tn,
+            MSSQLTableName,
             "BUSINESSTIME",
             parsedCount,
-            l)
+            limit)
           try {
             var data: String = ""
             if(rs.next()) {
@@ -53,8 +43,8 @@ class TFL2Parser(tableName: String, limit: Int) extends Runnable {
               data += NationalDebt.getData(rs)
             }
             MySQLUtil.insertNationalDebt(MySQLConnString, MySQLuser, MySQLkey, targetTableName, data)
-            parsedCount += l
-            print("From table:" + tn + ",page:" + parsedCount + "\r\n")
+            parsedCount += limit
+            print("From table:" + MSSQLTableName + ",page:" + parsedCount + "\r\n")
           }
           catch {
             case e: SQLException => {
@@ -68,10 +58,10 @@ class TFL2Parser(tableName: String, limit: Int) extends Runnable {
 
         val rs: ResultSet = MSSQLUtil.getTable(
           MSSQLConnString,
-          tn,
+          MSSQLTableName,
           "TDATETIME",
           0,
-          l)
+          limit)
         try {
           var data: String = null
           if(rs.next()) {
@@ -83,7 +73,7 @@ class TFL2Parser(tableName: String, limit: Int) extends Runnable {
             data += CommodityFuture.getData(rs)
           }
           MySQLUtil.insertCommodityFuture(MySQLConnString, MySQLuser, MySQLkey, targetTableName, data)
-          print("From table:" + tn + ".\r\n")
+          print("From table:" + MSSQLTableName + ".\r\n")
         }
         catch {
           case e: SQLException => {

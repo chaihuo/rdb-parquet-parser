@@ -11,13 +11,13 @@ import mysql.MySQLUtil
  * Created by root on 15-9-21.
  */
 class CommodityFutureParser(tableName: String, limit: Int) extends Runnable {
-  val MSSQLConnString : String = "jdbc:sqlserver://172.19.17.186:1433;databaseName=GTA_MFL1_TAQ_201507;user=sa;password=sa;"
+  val MSSQLConnString : String = "jdbc:sqlserver://172.19.17.222:1433;databaseName=GTA_MFL1_TAQ_201505;user=sa;password=sa;"
 
   val MySQLConnString: String = "jdbc:mysql://qkdata1.cltv2qruve9e.rds.cn-north-1.amazonaws.com.cn:3306/HF_Future?useUnicode=true&characterEncoding=utf8"
   val MySQLuser: String = "hf_app"
   val MySQLkey: String = "hf_app%2015"
   val tn: String = tableName
-  val l: Int = 10000
+  val l: Int = 1000
 
 //  // Constructor
 //  def this(tableName : String, limit : String) = {

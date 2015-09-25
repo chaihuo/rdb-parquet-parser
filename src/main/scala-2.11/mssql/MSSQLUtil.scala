@@ -9,7 +9,6 @@ import java.util
 object MSSQLUtil {
 
 
-
   def getTableList(connString: String): util.ArrayList[String] = {
 
     if(connString == null || connString.isEmpty) {

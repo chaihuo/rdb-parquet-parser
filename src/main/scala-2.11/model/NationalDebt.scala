@@ -11,7 +11,7 @@ object NationalDebt {
 
   def whichTable(symbol: String): String = {
     if (symbol.toLowerCase().contains("t") && symbol.toLowerCase().matches("\\bt\\d{4}")) return "t"
-    if (symbol.toLowerCase().contains("tf")) return null
+    if (symbol.toLowerCase().contains("tf")) return "tf"
     return null
   }
   

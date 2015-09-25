@@ -15,7 +15,7 @@ import mysql.MySQLUtil
 object CommodityFutureMSSQL2MySQLMultiThread{
   //  log class
 
-  val MSSQLConnString : String = "jdbc:sqlserver://172.19.17.186:1433;databaseName=GTA_MFL1_TAQ_201507;user=sa;password=sa;"
+  val MSSQLConnString : String = "jdbc:sqlserver://172.19.17.222:1433;databaseName=GTA_MFL1_TAQ_201507;user=sa;password=sa;"
 
   val MySQLConnString: String = "jdbc:mysql://qkdata1.cltv2qruve9e.rds.cn-north-1.amazonaws.com.cn:3306/HF_Future?useUnicode=true&characterEncoding=utf8"
   val MySQLuser: String = "hf_app"

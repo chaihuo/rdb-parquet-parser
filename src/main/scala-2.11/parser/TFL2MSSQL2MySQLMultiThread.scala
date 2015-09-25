@@ -13,50 +13,35 @@ import parser.TFL2Parser
 object TFL2MSSQL2MySQLMultiThread{
   //  log class
 
-  val MSSQLConnString : String = "jdbc:sqlserver://172.19.17.222:1433;databaseName=GTA_TFL2_TAQ_201503;user=sa;password=sa;"
+//  val MSSQLConnString : String = "jdbc:sqlserver://172.19.17.186:1433;databaseName=GTA_TFL2_TAQ_201407;user=sa;password=sa;"
 
   val MySQLConnString: String = "jdbc:mysql://qkdata1.cltv2qruve9e.rds.cn-north-1.amazonaws.com.cn:3306/HF_Future?useUnicode=true&characterEncoding=utf8"
   val MySQLuser: String = "hf_app"
   val MySQLkey: String = "hf_app%2015"
-  val targetNationalDebtTableName: String = ""
+  val limit: Int = 1000
+//  val targetNationalDebtTableName: String = ""
 
   def main(args: Array[String]) {
 
     val linkedQueue: LinkedBlockingQueue[Runnable] = new LinkedBlockingQueue[Runnable]
-    val executor: ThreadPoolExecutor = new ThreadPoolExecutor(20, 20, 7, TimeUnit.DAYS, linkedQueue)// All threads wait for 2 days max
-    try {
-      // Get MSSQL tables
-      val tableList: util.ArrayList[String] = MSSQLUtil.getTableList(MSSQLConnString)
+    val executor: ThreadPoolExecutor = new ThreadPoolExecutor(60, 60, 7, TimeUnit.DAYS, linkedQueue)// All threads wait for 2 days max
 
-      // Convert tables in table listh
-
-      val tableNum: Int = tableList.size()
-      var currentTableNum: Int = 0
-      val limit: Int = 1000
-      while (currentTableNum < tableNum) {
-        val tableName: String = tableList.get(currentTableNum)
-        print(tableName)
-        // Copy into MySQL table
-
-        if(tableName != null) {
-          val tfL2Parser = new TFL2Parser(tableName, limit)
-          executor.execute(tfL2Parser)
-          print(
-            " Pool size：" + executor.getPoolSize()
-              + "，queue size：" + executor.getQueue().size()
-              + "，Completed task count：" + executor.getCompletedTaskCount()
-              + ".\r\n"
-          )
-        }
-        currentTableNum += 1
-      }
-      executor.shutdown()
+    // TODO: these conn string should move to json configuration file
+    val databasesConnString: util.ArrayList[String] = new util.ArrayList[String]
+    for(i <- 7 to 9) {
+      databasesConnString.add("jdbc:sqlserver://172.19.17.186:1433;databaseName=GTA_TFL2_TAQ_20140" + i + ";user=sa;password=sa;")
     }
-    catch {
-      case e: IOException => {
-        e.printStackTrace
-      }
+    for(i <- 10 to 12) {
+      databasesConnString.add("jdbc:sqlserver://172.19.17.186:1433;databaseName=GTA_TFL2_TAQ_2014" + i + ";user=sa;password=sa;")
     }
+    for(i <- 1 to 7) {
+      databasesConnString.add("jdbc:sqlserver://172.19.17.186:1433;databaseName=GTA_TFL2_TAQ_20150" + i + ";user=sa;password=sa;")
+    }
+
+    for(i <-0 to  databasesConnString.size()-1 ) {
+      TFL2MSSQLParser.databaseParser(executor, databasesConnString.get(i), MySQLConnString, MySQLuser, MySQLkey, limit)
+    }
+    executor.shutdown()
     executor.awaitTermination(7, TimeUnit.DAYS)
     print("Finish!\r\n")
   }
