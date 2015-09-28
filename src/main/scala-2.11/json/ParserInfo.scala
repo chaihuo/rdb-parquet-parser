@@ -11,10 +11,11 @@ class ParserInfo {
   private var MYSQL_DB_NAME: String = null
   private var MYSQL_USER: String = null
   private var MYSQL_PWD: String = null
-  private var MYSQL_TABLE: String = null
-  private var MYSQL_PRIMARY_COLUMN: String = null
+//  private var MYSQL_TABLE: String = null
+  private var MYSQL_PRIMARY_COLUMN: String = null //abandoned
   private var DATA_SET_LIMIT: Integer = 1000
-  private var SCHEMA_FILE_PATH: String = null
+  private var CF_SCHEMA_FILE_PATH: String = null
+  private var TF_SCHEMA_FILE_PATH: String = null
   private var OUTPUT_PATH: String = null
 
 
@@ -58,13 +59,13 @@ class ParserInfo {
     MYSQL_PWD = mysqlPwd
   }
 
-  def getMysqlTable: String = {
-    return MYSQL_TABLE
-  }
-
-  def setMysqlTable(mysqlTable: String) {
-    MYSQL_TABLE = mysqlTable
-  }
+//  def getMysqlTable: String = {
+//    return MYSQL_TABLE
+//  }
+//
+//  def setMysqlTable(mysqlTable: String) {
+//    MYSQL_TABLE = mysqlTable
+//  }
 
   def getMysqlPrimaryColumn: String = {
     return MYSQL_PRIMARY_COLUMN
@@ -83,12 +84,21 @@ class ParserInfo {
   }
 
 
-  def getSchemaFilePath: String = {
-    return SCHEMA_FILE_PATH
+  def getCFSchemaFilePath: String = {
+    return CF_SCHEMA_FILE_PATH
   }
 
-  def setSchemaFilePath(schemaFilePath: String) {
-    SCHEMA_FILE_PATH = schemaFilePath
+  def setCFSchemaFilePath(schemaFilePath: String) {
+    CF_SCHEMA_FILE_PATH = schemaFilePath
+  }
+
+
+  def getTFSchemaFilePath: String = {
+    return TF_SCHEMA_FILE_PATH
+  }
+
+  def setTFSchemaFilePath(schemaFilePath: String) {
+    TF_SCHEMA_FILE_PATH = schemaFilePath
   }
 
   def getOutputPath: String = {
@@ -100,7 +110,8 @@ class ParserInfo {
   }
 
   def getConnString: String =  {
-    return "jdbc:mysql://" + MYSQL_HOST + ":" + MYSQL_PORT + "/" + MYSQL_DB_NAME + "?user=" + MYSQL_USER + "&password=" + MYSQL_PWD
+//    return "jdbc:mysql://" + MYSQL_HOST + ":" + MYSQL_PORT + "/" + MYSQL_DB_NAME + "?user=" + MYSQL_USER + "&password=" + MYSQL_PWD
+    return "jdbc:mysql://" + MYSQL_HOST + ":" + MYSQL_PORT + "/" + MYSQL_DB_NAME + "?useUnicode=true&characterEncoding=utf8"
   }
 
   def isValid(): Boolean = {
@@ -109,10 +120,11 @@ class ParserInfo {
       && MYSQL_DB_NAME != null
       && MYSQL_USER != null
       && MYSQL_PWD != null
-      && MYSQL_TABLE != null
+//      && MYSQL_TABLE != null
       && MYSQL_PRIMARY_COLUMN  != null
       && DATA_SET_LIMIT != null
-      && SCHEMA_FILE_PATH != null
+      && CF_SCHEMA_FILE_PATH != null
+      && TF_SCHEMA_FILE_PATH != null
       && OUTPUT_PATH != null) {
       if(DATA_SET_LIMIT > 0) {
         return true

@@ -9,10 +9,12 @@ import java.util.Arrays
  */
 object ParquetTable {
   def tableList(rs: ResultSet): util.List[String] = {
-    val list: util.List[String] = util.Arrays.asList(String.valueOf(rs.getInt("id")),
-    rs.getString("content"),
-    String.valueOf(rs.getFloat("price")),
-    String.valueOf(rs.getTimestamp("time").getTime))
+    val list: util.List[String] = util.Arrays.asList(
+      String.valueOf(rs.getInt("id")),
+      rs.getString("content"),
+      String.valueOf(rs.getFloat("price")),
+      String.valueOf(rs.getTimestamp("time").getTime)
+    )
     return list
   }
 }
