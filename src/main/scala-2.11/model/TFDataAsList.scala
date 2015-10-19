@@ -12,7 +12,7 @@ object TFDataAsList {
     val df: SimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS")
     val dfDate: SimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd")
     val list: util.List[String] = util.Arrays.asList(
-      rs.getString("SYMBOL"),
+      rs.getString("CONTRACTID"),
       df.format(rs.getTimestamp("BUSINESSTIME")),
       rs.getDouble("OPENPRICE").toString(),
       rs.getDouble("LASTPRICE").toString(),
