@@ -7,14 +7,14 @@ import com.google.gson.Gson
 /**
  * Created by root on 15-8-12.
  */
-object ParquetInfoJsonUtil extends JsonConfigUtil{
+object MSSQLConnInfoJsonUtil extends JsonConfigUtil{
   
-  val DEFAULT_JSON_PATH = "./src/test/resources/configuration.json"
+  val DEFAULT_JSON_PATH = "./src/test/resources/MSSQLConnConfig.json"
   
-  def getInfo(): ParserInfo = {
+  def getInfo(): MSSQLConnInfo = {
     val gson: Gson = new Gson()
     val jsonString: String = this.ReadJsonFile(DEFAULT_JSON_PATH)
-    val info: ParserInfo = gson.fromJson(jsonString, classOf[ParserInfo])
+    val info: MSSQLConnInfo = gson.fromJson(jsonString, classOf[MSSQLConnInfo])
     if (info == null) {
       throw new IOException("Configuration file maybe empty or contains error")
     }
@@ -22,10 +22,10 @@ object ParquetInfoJsonUtil extends JsonConfigUtil{
     return info
   }
   
-  def getInfo(file_path: String): ParserInfo = {
+  def getInfo(file_path: String): MSSQLConnInfo = {
     val gson: Gson = new Gson()
     val jsonString: String = this.ReadJsonFile(file_path)
-    val info: ParserInfo = gson.fromJson(jsonString, classOf[ParserInfo])
+    val info: MSSQLConnInfo = gson.fromJson(jsonString, classOf[MSSQLConnInfo])
     if (info == null) {
       throw new IOException("Configuration file maybe empty or contains error")
     }

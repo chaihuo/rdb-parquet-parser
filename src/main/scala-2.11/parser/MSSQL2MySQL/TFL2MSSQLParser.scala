@@ -1,4 +1,4 @@
-package parser
+package parser.MSSQL2MySQL
 
 import java.io.IOException
 import java.util

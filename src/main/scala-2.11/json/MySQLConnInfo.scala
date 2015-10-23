@@ -5,7 +5,7 @@ import java.io.IOException
 /**
  * Created by root on 15-8-6.
  */
-class ParserInfo {
+class MySQLConnInfo {
   private var MYSQL_HOST: String = null
   private var MYSQL_PORT: String = null
   private var MYSQL_DB_NAME: String = null
@@ -109,9 +109,14 @@ class ParserInfo {
     OUTPUT_PATH = outputPath
   }
 
-  def getConnString: String =  {
+  def getConnStringWithoutAccount: String =  {
 //    return "jdbc:mysql://" + MYSQL_HOST + ":" + MYSQL_PORT + "/" + MYSQL_DB_NAME + "?user=" + MYSQL_USER + "&password=" + MYSQL_PWD
     return "jdbc:mysql://" + MYSQL_HOST + ":" + MYSQL_PORT + "/" + MYSQL_DB_NAME + "?useUnicode=true&characterEncoding=utf8"
+  }
+
+  def getConnStringWithAccount: String =  {
+    return "jdbc:mysql://" + MYSQL_HOST + ":" + MYSQL_PORT + "/" + MYSQL_DB_NAME + "?user=" + MYSQL_USER + "&password=" + MYSQL_PWD
+//    return "jdbc:mysql://" + MYSQL_HOST + ":" + MYSQL_PORT + "/" + MYSQL_DB_NAME + "?useUnicode=true&characterEncoding=utf8"
   }
 
   def isValid(): Boolean = {

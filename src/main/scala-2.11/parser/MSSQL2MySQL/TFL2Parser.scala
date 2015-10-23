@@ -1,9 +1,9 @@
-package parser
+package parser.MSSQL2MySQL
 
 import java.io.IOException
 import java.sql.{ResultSet, SQLException}
 
-import model.{NationalDebt, CommodityFuture}
+import model.{CommodityFuture, NationalDebt}
 import mssql.MSSQLUtil
 import mysql.MySQLUtil
 

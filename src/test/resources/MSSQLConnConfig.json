@@ -1,0 +1,7 @@
+{
+  "MSSQL_HOST": "172.19.17.186",
+  "MSSQL_PORT": "1433",
+  "MSSQL_DB_NAME": "GTA_TFL2_TAQ_201407",
+  "MSSQL_USER": "sa",
+  "MSSQL_PWD": "sa%2015"
+}

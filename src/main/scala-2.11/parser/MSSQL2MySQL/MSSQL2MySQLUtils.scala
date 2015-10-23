@@ -1,4 +1,4 @@
-package parser
+package parser.MSSQL2MySQL
 
 import java.io._
 import java.sql.{ResultSet, SQLException}
@@ -10,6 +10,7 @@ import mysql.MySQLUtil
 
 /**
  * Created by root on 15-7-30.
+ * TODO was impleted by parser.CommodityFutureMSSQL2MySQLMultiThread.scala & parser.TFL2MSSQL2MySQLMultiThread.scala
  */
 object MSSQL2MySQLUtils {
 //  log class
