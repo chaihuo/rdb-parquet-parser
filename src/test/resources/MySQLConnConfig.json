@@ -1,0 +1,13 @@
+{
+  "MYSQL_HOST": "172.19.17.222",
+  "MYSQL_PORT": "3306",
+  "MYSQL_DB_NAME": "test",
+  "MYSQL_USER": "root",
+  "MYSQL_PWD": "root2014",
+  "MYSQL_TABLE": "",
+  "MYSQL_PRIMARY_COLUMN": "",
+  "DATA_SET_LIMIT": "10000",
+  "TF_SCHEMA_FILE_PATH": "./src/test/resources/tf.schema",
+  "CF_SCHEMA_FILE_PATH": "./src/test/resources/cf.schema",
+  "OUTPUT_PATH": "./src/test/resources/ParquetFiles/"
+}

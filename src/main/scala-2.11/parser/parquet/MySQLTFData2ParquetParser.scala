@@ -2,10 +2,8 @@ package parser.parquet
 
 import java.io._
 import java.sql.{ResultSet, SQLException}
-import java.text.SimpleDateFormat
-import java.util.Arrays
 
-import model.{TFDataAsList, CFDataAsList, ParquetTable}
+import model.TFDataAsList
 import mysql.MySQLUtil
 import org.apache.hadoop.fs.Path
 import org.apache.parquet.schema.{MessageType, MessageTypeParser}

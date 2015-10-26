@@ -50,7 +50,7 @@ class CommodityFutureParser(tableName: String, limit: Int) extends Runnable {
               data += ","
               data += CommodityFuture.getData(rs)
             }
-            MySQLUtil.insertCommodityFuture(MSSQLInfo.getConnString, MSSQLInfo.getMSsqlUser, MSSQLInfo.getMSsqlPwd, targetTableName, data)
+            MySQLUtil.insertCommodityFuture(MySQLInfo.getConnStringWithoutAccount, MySQLInfo.getMysqlUser, MySQLInfo.getMysqlPwd, targetTableName, data)
             parsedCount += l
             print("From table:" + tn + ",page:" + parsedCount + "\r\n")
           }
@@ -80,7 +80,7 @@ class CommodityFutureParser(tableName: String, limit: Int) extends Runnable {
             data += ","
             data += CommodityFuture.getData(rs)
           }
-          MySQLUtil.insertCommodityFuture(MSSQLInfo.getConnString, MSSQLInfo.getMSsqlUser, MSSQLInfo.getMSsqlPwd, targetTableName, data)
+          MySQLUtil.insertCommodityFuture(MySQLInfo.getConnStringWithoutAccount, MySQLInfo.getMysqlUser, MySQLInfo.getMysqlPwd, targetTableName, data)
           print("From table:" + tn + ".\r\n")
         }
         catch {
